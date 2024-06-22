@@ -1,0 +1,159 @@
+/* Container */
+.container {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr; /* Ensure grid alignment */
+}
+
+/* Content */
+.content {
+    position: fixed;
+    top: 0;
+    left: 100px; /* Adjusted left position */
+    width: 250px;
+    height: 686px;
+    border: 2px solid black;
+    background: #552657;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px 25px;
+}
+
+/* Button */
+button {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    color: white; /* Ensure text color for visibility */
+    cursor: pointer;
+    transition: background-color 0.25s, color 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #552657;
+    color: white; /* Ensures text is visible on hover */
+}
+
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Light Mode */
+@media (prefers-color-scheme: light) {
+    :root {
+        color: #213547;
+        background-color: white;
+    }
+
+    button {
+        background-color: #e0e0e0;
+        color: #1a1a1a;
+    }
+}
+
+/* Additional Classes */
+.draftssent, .threads {
+    margin-top: 25px;
+    padding-right: 65px;
+    width: 250px;
+}
+
+.threads {
+    margin-top: 30px;
+}
+
+.opt-button {
+    position: relative;
+    width: 250px;
+    height: 700px;
+    right: 20px;
+    top: 25px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.opt-button:hover {
+    color: #1a1a1a;
+}
+
+.general, .ui, .random, .addchannel {
+    position: relative;
+    top: 15px;
+    gap: 2px; /* Ensure consistent spacing */
+    display: grid; /* Use grid for alignment */
+    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); /* Ensure proper spacing */
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 5px; /* Sidebar aligned to the left */
+    width: 70px; /* Slightly increased width for better aesthetics */
+    height: 680px; /* Full height for better alignment */
+    background-color: #240046; /* Darker background for better contrast */
+    padding: 10px; /* Less padding for compactness */
+    border-radius: 0 10px 10px 0; /* Rounded corners on the right */
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 60px); /* Uniform item height */
+    gap: 5px; /* Space between items */
+    align-items: center; /* Center items vertically */
+}
+
+/* Sidebar Item */
+.sidebar .user-side,
+.sidebar .home-side,
+.sidebar .des-side,
+.sidebar .more-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60px; /* Ensure consistent size */
+    background-color:#552657; /* Slightly lighter background */
+    border-radius: 8px; /* Rounded corners */
+    color: white; /* White text color */
+    font-size: 1.2em; /* Larger icon size */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Sidebar Item Hover */
+.sidebar .user-side:hover,
+.sidebar .home-side:hover,
+.sidebar .des-side:hover,
+.sidebar .more-side:hover {
+    background-color: #552657;
+    /* color: white; */
+}
+
+/* Additional styles for icons */
+.sidebar .user-side svg,
+.sidebar .home-side svg,
+.sidebar .des-side svg,
+.sidebar .more-side svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Ensuring buttons are centered in the grid */
+.sidebar div {
+    display: flex;
+    justify-content: center;
+}

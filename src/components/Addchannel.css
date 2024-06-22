@@ -1,0 +1,39 @@
+
+
+.add-channel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: purple;
+    padding: 20px;
+    width: 550px;
+    height: 550px;
+  }
+  
+  .paper-container {
+    width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between fields */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  }
+  
+  .form-control {
+    width: 100%; /* Full width for consistent alignment */
+  }
+  
+  .form-field {
+    width: 100%; /* Full width to fit in the container */
+    margin-bottom: 20px; /* Space below each field */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end; /* Align the button to the right */
+    margin-top: 20px; /* Space above the button */
+  }
+  
