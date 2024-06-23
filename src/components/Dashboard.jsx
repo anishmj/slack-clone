@@ -13,6 +13,8 @@ import DragHandleIcon from '@mui/icons-material/DragHandle';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import GestureIcon from '@mui/icons-material/Gesture';
 import Addchannel from './Addchannel';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 import './Dashboard.css';
 
 function Dashboard() {
@@ -116,6 +118,7 @@ function Dashboard() {
               </div>
             </div>
           </>
+         
         )}
       </div>
     </div>
