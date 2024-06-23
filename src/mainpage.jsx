@@ -4,13 +4,14 @@ import './App.css';
 import './index.css';
 import './mainpage.css'; // Styles for Mainpage
 import logo from './assets/slack_logo.jpeg';
-import Button from '@mui/material/Button';
-import PhoneIcon from '@mui/icons-material/Phone';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import WavingHandIcon from '@mui/icons-material/WavingHand';
+import hello from './assets/hello.png';
+import img1 from './assets/img1.png';
+import img2 from './assets/img2.png';
+import img3 from './assets/img3.png';
+
 function Mainpage() {
     const navigate = useNavigate();
-    
+
     const handleLoginClick = () => {
         navigate('/login');
     };
@@ -28,42 +29,55 @@ function Mainpage() {
                         <li>Pricing</li>
                     </ul>
                 </nav>
-                
-                
+
                 <div className="search-box">
-                <Button 
-                    variant="contained" 
-                    color="primary" 
-                    onClick={handleLoginClick}
-                    className="main-button"
-                >
-                    Get Started
-                </Button>
+                    <button className="main-button" onClick={handleLoginClick}>
+                        Get Started
+                    </button>
                 </div>
             </header>
 
             <div className='blue-nav'>
-            <button>
-            <nav>
-                <span>✅ There’s a new way to manage projects and tasks in Slack.Start using lists</span>
+                <nav>
+                    <span>✅ There’s a new way to manage projects and tasks in Slack. Start using lists</span>
                 </nav>
-            </button>
             </div>
-            <main className="main-content">
-                
-                
-                <br />
-                {/* <Button 
-                    variant="outlined" 
-                    color="secondary" 
-                    onClick={handleLoginClick}
-                    className="main-button mt-2"
-                >
-                    Login
-                </Button> */}
-                {/* <i class="fa-solid fa-hand-wave"></i> */}
-                
-            </main>
+
+            <div className='welcome-back'>
+                <nav>
+                    <img src={hello} alt="Hello" className="hello" />
+                    <span>Welcome back</span>
+                </nav>
+            </div>
+
+            <div className='cards'>
+                <div className='card'>
+                    <img src={img1} alt='Image 1' className='card-img'></img>
+                    <div className='card-content'>
+                        <h3>Your quick start guide to Slack</h3>
+                       
+                        <button className='card-button'>Get Started</button>
+                    </div>
+                </div>
+
+                <div className='card'>
+                    <img src={img2} alt='Image 1' className='card-img'></img>
+                    <div className='card-content'>
+                        <h3>Find and Start Conversations</h3>
+                        
+                        <button className='card-button'>Get Started</button>
+                    </div>
+                </div>
+
+                <div className='card'>
+                    <img src={img3} alt='Image 1' className='card-img'></img>
+                    <div className='card-content'>
+                        <h3>How to use Channels</h3>
+                       
+                        <button className='card-button'>Get Started</button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
