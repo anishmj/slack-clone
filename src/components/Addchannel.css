@@ -9,9 +9,11 @@
     padding: 20px;
     width: 550px;
     height: 550px;
+    
   }
   
   .paper-container {
+    
     width: 400px;
     padding: 20px;
     display: flex;

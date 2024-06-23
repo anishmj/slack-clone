@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -8,11 +8,11 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import './Addchannel.css';
 
-export default function Addchannel() {
+export default function Addchannel({ onAddChannel, onBack }) {
   const CHARACTER_LIMIT = 20;
-  const [type, setType] = React.useState('');
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const [type, setType] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
@@ -26,9 +26,12 @@ export default function Addchannel() {
     setDescription(event.target.value);
   };
 
-  const handleLoginClick = () => {
-   
-    
+  const handleCreateChannel = () => {
+    if (name.trim()) {
+      onAddChannel(name.trim());
+    } else {
+      alert("Channel name is required.");
+    }
   };
 
   return (
@@ -67,12 +70,22 @@ export default function Addchannel() {
         </FormControl>
         <div className="button-container">
           <Button
-            onClick={handleLoginClick}
+            onClick={handleCreateChannel}
             fullWidth
             variant="contained"
             className="form-field"
           >
-           Create Channel
+            Create Channel
+          </Button>
+        </div>
+        <div className="button-container">
+          <Button
+            onClick={onBack}
+            fullWidth
+            variant="outlined"
+            className="form-field"
+          >
+            Back
           </Button>
         </div>
       </Paper>

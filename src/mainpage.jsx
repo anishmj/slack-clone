@@ -7,6 +7,7 @@ import logo from './assets/slack_logo.jpeg';
 import Button from '@mui/material/Button';
 import PhoneIcon from '@mui/icons-material/Phone';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import WavingHandIcon from '@mui/icons-material/WavingHand';
 function Mainpage() {
     const navigate = useNavigate();
     
@@ -30,14 +31,14 @@ function Mainpage() {
                 
                 
                 <div className="search-box">
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        className="talk-sales"
-                        endIcon={<PhoneIcon/>}
-                    >
-                        TALK TO SALES
-                    </Button>
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    onClick={handleLoginClick}
+                    className="main-button"
+                >
+                    Get Started
+                </Button>
                 </div>
             </header>
 
@@ -49,24 +50,19 @@ function Mainpage() {
             </button>
             </div>
             <main className="main-content">
-                <h1>Welcome to Slack</h1>
-                <Button 
-                    variant="contained" 
-                    color="primary" 
-                    onClick={handleLoginClick}
-                    className="main-button"
-                >
-                    Get Started
-                </Button>
+                
+                
                 <br />
-                <Button 
+                {/* <Button 
                     variant="outlined" 
                     color="secondary" 
                     onClick={handleLoginClick}
                     className="main-button mt-2"
                 >
                     Login
-                </Button>
+                </Button> */}
+                {/* <i class="fa-solid fa-hand-wave"></i> */}
+                
             </main>
         </div>
     );
