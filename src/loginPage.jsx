@@ -21,17 +21,17 @@ function Login() {
                 {checked ? <Signuser /> : <Loguser />}
                 <br />
                 <Chip
-                    icon={checked ? <FaceIcon /> : <LockIcon/>}
-                    label={checked ? "Signup" : "Login"}
-                    color="primary"
-                    variant="outlined"
+                    // icon={checked ? <FaceIcon /> : <LockIcon/>}
+                    // label={checked ? "Signup" : "Login"}
+                    // color="primary"
+                    // variant="outlined"
                 />
                 <br />
-                <Switch
+                {/* <Switch
                     checked={checked}
                     onChange={handleChange}
                     inputProps={{ 'aria-label': 'controlled' }}
-                />
+                /> */}
             </Paper>
         </div>
     );

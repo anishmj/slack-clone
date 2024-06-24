@@ -1,63 +1,145 @@
 import React, { useState } from "react";
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Input from '@mui/material/Input';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Button from '@mui/material/Button';
-import GoogleIcon from '@mui/icons-material/Google';
-import AppleIcon from '@mui/icons-material/Apple';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
+import {
+  TextField,
+  FormControl,
+  InputLabel,
+  Input,
+  InputAdornment,
+  IconButton,
+  Button,
+  Alert,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import GoogleIcon from "@mui/icons-material/Google";
+import AppleIcon from "@mui/icons-material/Apple";
 import { useNavigate } from "react-router-dom";
 
+// Email validation utility
+const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-function Signuser() {
-  // Password visibility toggle
+function Auth() {
   const [showPassword, setShowPassword] = useState(false);
-
-  // Input fields
   const [usernameInput, setUsernameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
+
+  // Input errors
+  const [usernameError, setUsernameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  // Form validity and success message
+  const [formValid, setFormValid] = useState();
+  const [success, setSuccess] = useState();
 
   // Alert management
   const [showAlert, setShowAlert] = useState(false);
   const [alertSeverity, setAlertSeverity] = useState('success');
   const [alertMessage, setAlertMessage] = useState(null);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  // Toggle between login and sign-up
+  const [formType, setFormType] = useState('login'); // 'login' or 'signup'
 
   const navigate = useNavigate();
 
-  const handleLoginClick = () => {
-    if (usernameInput && emailInput && passwordInput) {
-      // Simulate successful sign-up
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => event.preventDefault();
+
+  // Validation for onBlur Username
+  const handleUsername = () => {
+    if (!usernameInput) {
+      setUsernameError(true);
+      return;
+    }
+    setUsernameError(false);
+  };
+
+  // Validation for onBlur Email
+  const handleEmail = () => {
+    if (!isEmailValid(emailInput)) {
+      setEmailError(true);
+      return;
+    }
+    setEmailError(false);
+  };
+
+  // Validation for onBlur Password
+  const handlePassword = () => {
+    if (!passwordInput || passwordInput.length < 8 || passwordInput.length > 20) {
+      setPasswordError(true);
+      return;
+    }
+    setPasswordError(false);
+  };
+
+  const handleFormSubmit = () => {
+    // Validation
+    handleUsername();
+    handleEmail();
+    handlePassword();
+
+    if (usernameError || emailError || passwordError) {
+      setAlertSeverity('error');
+      setAlertMessage('Please correct the errors and try again.');
+      setShowAlert(true);
+      return;
+    }
+
+    // Store data in local storage
+    if (formType === 'signup') {
+      localStorage.setItem('username', usernameInput);
+      localStorage.setItem('email', emailInput);
+      localStorage.setItem('password', passwordInput);
+    }
+
+    if (formType === 'signup') {
+      if (!usernameInput || !emailInput || !passwordInput) {
+        setAlertSeverity('error');
+        setAlertMessage('All fields are required for sign-up.');
+        setShowAlert(true);
+        return;
+      }
       setAlertSeverity('success');
       setAlertMessage('Sign-up successful! Redirecting...');
-      setShowAlert(true);
-
-      setTimeout(() => {
-        setShowAlert(false);
-        navigate('/Dashboard');
-      }, 500);
     } else {
-      // Show error if inputs are missing
-      setAlertSeverity('error');
-      setAlertMessage('Please fill in all fields.');
-      setShowAlert(true);
+      if (!emailInput || !passwordInput) {
+        setAlertSeverity('error');
+        setAlertMessage('Email and password are required for login.');
+        setShowAlert(true);
+        return;
+      }
+      setAlertSeverity('success');
+      setAlertMessage('Login successful! Redirecting...');
     }
+
+    setShowAlert(true);
+
+    setTimeout(() => {
+      setShowAlert(false);
+      navigate('/Dashboard');
+    }, 500);
   };
 
   return (
-    <div className="signuser-container">
+    <div className="auth-container">
+      <ToggleButtonGroup
+        value={formType}
+        exclusive
+        onChange={(e, newFormType) => setFormType(newFormType)}
+        aria-label="auth form type"
+        sx={{ marginBottom: "10px" }}
+      >
+        <ToggleButton value="login" aria-label="login">
+          Login
+        </ToggleButton>
+        <ToggleButton value="signup" aria-label="signup">
+          Sign Up
+        </ToggleButton>
+      </ToggleButtonGroup>
       <Stack sx={{ width: '100%' }} spacing={2} className="alert-stack">
         {showAlert && (
           <Alert severity={alertSeverity} onClose={() => setShowAlert(false)}>
@@ -65,27 +147,35 @@ function Signuser() {
           </Alert>
         )}
       </Stack>
+      {formType === 'signup' && (
+        <p>
+          <TextField
+            id="username"
+            label="Username"
+            value={usernameInput}
+            onChange={(e) => setUsernameInput(e.target.value)}
+            onBlur={handleUsername}
+            variant="standard"
+            fullWidth
+            size="small"
+            error={usernameError}
+            helperText={usernameError && "Username is required."}
+          />
+        </p>
+      )}
       <p>
-        <TextField 
-          id="username" 
-          label="Username" 
-          value={usernameInput}
-          onChange={(e) => setUsernameInput(e.target.value)}
-          variant="standard" 
-          fullWidth 
-          size="small" 
-        />
-      </p>
-      <p>
-        <TextField 
-          id="email" 
-          inputMode="email" 
-          label="Email" 
+        <TextField
+          id="email"
+          inputMode="email"
+          label="Email"
           value={emailInput}
           onChange={(e) => setEmailInput(e.target.value)}
-          variant="standard" 
-          fullWidth 
-          size="small" 
+          onBlur={handleEmail}
+          variant="standard"
+          fullWidth
+          size="small"
+          error={emailError}
+          helperText={emailError && "Please enter a valid email."}
         />
       </p>
       <p>
@@ -97,6 +187,9 @@ function Signuser() {
             type={showPassword ? 'text' : 'password'}
             value={passwordInput}
             onChange={(e) => setPasswordInput(e.target.value)}
+            onBlur={handlePassword}
+            error={passwordError}
+            helperText={passwordError && "Password must be 8-20 characters long."}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -111,19 +204,19 @@ function Signuser() {
           />
         </FormControl>
       </p>
-      <Button onClick={handleLoginClick} fullWidth variant="contained">
-        SIGN UP
+      <Button onClick={handleFormSubmit} fullWidth variant="contained">
+        {formType === 'signup' ? 'SIGN UP' : 'LOGIN'}
       </Button>
       <br /><br />
-      <Button onClick={handleLoginClick} fullWidth variant="outlined" startIcon={<GoogleIcon />}>
+      <Button onClick={handleFormSubmit} fullWidth variant="outlined" startIcon={<GoogleIcon />}>
         Continue with Google
       </Button>
       <br /><br />
-      <Button onClick={handleLoginClick} fullWidth variant="outlined" startIcon={<AppleIcon />}>
+      <Button onClick={handleFormSubmit} fullWidth variant="outlined" startIcon={<AppleIcon />}>
         Continue with Apple
       </Button>
     </div>
   );
 }
 
-export default Signuser;
+export default Auth;

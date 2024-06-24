@@ -72,7 +72,7 @@ function Mainpage() {
                 <div className='card'>
                     <img src={img3} alt='Image 1' className='card-img'></img>
                     <div className='card-content'>
-                        <h3>How to use Channels</h3>
+                        <h3>How to use Channels Effectively</h3>
                        
                         <button className='card-button'>Get Started</button>
                     </div>
