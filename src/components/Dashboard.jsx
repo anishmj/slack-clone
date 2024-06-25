@@ -50,16 +50,16 @@ function Dashboard() {
     <div className="dashboard">
       <div className='sidebar'>
         <div className='des-side'>
-          <Button variant="outlined" endIcon={<DragHandleIcon />}></Button>
+          <Button variant="" endIcon={<DragHandleIcon />}></Button>
         </div>
         <div className='user-side'>
-          <Button variant="outlined" endIcon={<AccountCircleIcon />}></Button>
+          <Button variant="" endIcon={<AccountCircleIcon />}></Button>
         </div>
         <div className='home-side'>
-          <Button variant="outlined" endIcon={<HomeIcon />}></Button>
+          <Button variant="" endIcon={<HomeIcon />}></Button>
         </div>
         <div className='more-side'>
-          <Button variant="outlined" endIcon={<MoreHorizIcon />}></Button>
+          <Button variant="" endIcon={<MoreHorizIcon />}></Button>
         </div>
       </div>
       <div className='content'>

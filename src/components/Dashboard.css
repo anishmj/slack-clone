@@ -113,7 +113,7 @@ button:focus-visible {
     border-radius: 0 10px 10px 0; /* Rounded corners on the right */
     display: grid;
     grid-template-rows: repeat(auto-fill, 60px); /* Uniform item height */
-    gap: 50px; /* Space between items */
+    gap: 10px; /* Space between items */
     align-items: center; /* Center items vertically */
 }
 
@@ -129,20 +129,19 @@ button:focus-visible {
     height: 60px; /* Ensure consistent size */
      /* Slightly lighter background */
     border-radius: 8px; /* Rounded corners */
-    color: #4a154b; /* White text color */
+     /* White text color */
     font-size: 1.2em; /* Larger icon size */
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* 
+
 .sidebar .user-side:hover,
 .sidebar .home-side:hover,
 .sidebar .des-side:hover,
 .sidebar .more-side:hover {
-    
-    
-} */
+    background-color: black;
+}
 
 /* Additional styles for icons */
 .sidebar .user-side svg,
