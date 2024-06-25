@@ -13,11 +13,17 @@ import DragHandleIcon from '@mui/icons-material/DragHandle';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import GestureIcon from '@mui/icons-material/Gesture';
 import Addchannel from './Addchannel';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Link } from 'react-router-dom'; // Import Link to handle navigation within the app
+import { useHistory } from 'react-router-dom';
+
 import './Dashboard.css';
 
 function Dashboard() {
+  const history = useHistory(); // Initialize useHistory hook
+
   const [muiAnchorEl, setMuiAnchorEl] = useState(null);
-  const [muiOpen, setMuiOpen] = useState(false);
+  const muiOpen = Boolean(muiAnchorEl);
   const [showAddChannel, setShowAddChannel] = useState(false);
   const [channels, setChannels] = useState([]);
 
@@ -34,12 +40,18 @@ function Dashboard() {
 
   const handleMuiClick = (event) => {
     setMuiAnchorEl(event.currentTarget);
-    setMuiOpen(true);
   };
 
   const handleMuiClose = () => {
     setMuiAnchorEl(null);
-    setMuiOpen(false);
+  };
+
+  const handleLogout = () => {
+    // Clear session data (example: remove authentication token)
+    localStorage.removeItem('authToken'); // Example: removing authentication token from localStorage
+
+    // Redirect to the main page or login page
+    history.push('/login'); // Redirect to the login page (adjust the route as per your application's structure)
   };
 
   const handleAddChannelClick = () => {
@@ -71,6 +83,22 @@ function Dashboard() {
         </div>
         <div className='more-side'>
           <Button variant="" endIcon={<MoreHorizIcon />}></Button>
+        </div>
+        <div>
+          <Button variant="" endIcon={<ArrowDropDownIcon />} onClick={handleMuiClick}>
+            <AccountCircleIcon />
+          </Button>
+          <Menu
+            anchorEl={muiAnchorEl}
+            open={muiOpen}
+            onClose={handleMuiClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem component={Link} to="/profile" onClick={handleMuiClose}>Profile</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </Menu>
         </div>
       </div>
       <div className='content'>
