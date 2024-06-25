@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { Button as BootstrapButton } from 'react-bootstrap';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
@@ -13,22 +13,33 @@ import DragHandleIcon from '@mui/icons-material/DragHandle';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import GestureIcon from '@mui/icons-material/Gesture';
 import Addchannel from './Addchannel';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
 import './Dashboard.css';
 
 function Dashboard() {
   const [muiAnchorEl, setMuiAnchorEl] = useState(null);
-  const muiOpen = Boolean(muiAnchorEl);
+  const [muiOpen, setMuiOpen] = useState(false);
   const [showAddChannel, setShowAddChannel] = useState(false);
   const [channels, setChannels] = useState([]);
 
+  // Fetch channels from localStorage on component mount
+  useEffect(() => {
+    const storedChannels = JSON.parse(localStorage.getItem('channels')) || [];
+    setChannels(storedChannels);
+  }, []);
+
+  // Update localStorage whenever channels state changes
+  useEffect(() => {
+    localStorage.setItem('channels', JSON.stringify(channels));
+  }, [channels]);
+
   const handleMuiClick = (event) => {
     setMuiAnchorEl(event.currentTarget);
+    setMuiOpen(true);
   };
 
   const handleMuiClose = () => {
     setMuiAnchorEl(null);
+    setMuiOpen(false);
   };
 
   const handleAddChannelClick = () => {
@@ -118,7 +129,6 @@ function Dashboard() {
               </div>
             </div>
           </>
-         
         )}
       </div>
     </div>
