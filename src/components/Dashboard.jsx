@@ -12,18 +12,19 @@ import HomeIcon from '@mui/icons-material/Home';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import GestureIcon from '@mui/icons-material/Gesture';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Addchannel from './Addchannel';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Link } from 'react-router-dom'; // Import Link to handle navigation within the app
-import { useHistory } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom'; // Import Link to handle navigation within the app
 import './Dashboard.css';
 
 function Dashboard() {
-  const history = useHistory(); // Initialize useHistory hook
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const [muiAnchorEl, setMuiAnchorEl] = useState(null);
   const muiOpen = Boolean(muiAnchorEl);
+  const [accountAnchorEl, setAccountAnchorEl] = useState(null); // State for account button dropdown
+  const accountOpen = Boolean(accountAnchorEl); // Open state for account dropdown
   const [showAddChannel, setShowAddChannel] = useState(false);
   const [channels, setChannels] = useState([]);
 
@@ -46,12 +47,18 @@ function Dashboard() {
     setMuiAnchorEl(null);
   };
 
-  const handleLogout = () => {
-    // Clear session data (example: remove authentication token)
-    localStorage.removeItem('authToken'); // Example: removing authentication token from localStorage
+  const handleAccountClick = (event) => {
+    setAccountAnchorEl(event.currentTarget); // Open account dropdown
+  };
 
-    // Redirect to the main page or login page
-    history.push('/login'); // Redirect to the login page (adjust the route as per your application's structure)
+  const handleAccountClose = () => {
+    setAccountAnchorEl(null); // Close account dropdown
+  };
+
+  const handleLogout = () => {
+    // Perform any logout logic here (e.g., clearing session data, etc.)
+    // After logout, redirect to the main page
+    navigate('/mainpage'); // Redirect to the main page (assuming '/mainpage' is your main page route)
   };
 
   const handleAddChannelClick = () => {
@@ -84,19 +91,17 @@ function Dashboard() {
         <div className='more-side'>
           <Button variant="" endIcon={<MoreHorizIcon />}></Button>
         </div>
-        <div>
-          <Button variant="" endIcon={<ArrowDropDownIcon />} onClick={handleMuiClick}>
-            <AccountCircleIcon />
-          </Button>
+        <div className='account'>
+          <Button variant='' endIcon={<LogoutIcon />} onClick={handleAccountClick}></Button>
           <Menu
-            anchorEl={muiAnchorEl}
-            open={muiOpen}
-            onClose={handleMuiClose}
+            anchorEl={accountAnchorEl}
+            open={accountOpen}
+            onClose={handleAccountClose}
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuItem component={Link} to="/profile" onClick={handleMuiClose}>Profile</MenuItem>
+            <MenuItem component={Link} to="/profile" onClick={handleAccountClose}>Profile</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>

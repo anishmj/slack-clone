@@ -16,6 +16,7 @@ function App() {
         <Route path='/getstarted' element={<Login />} />
         <Route path='/Dashboard' element={<Dashboard />} />
         <Route path='/addchannel' element={<Addchannel />} />
+        
       </Routes>
     </BrowserRouter>
   );
